@@ -201,9 +201,9 @@ sizes = res.layer_sizes()
 def _render(current_level):
     with view_slot.container():
         c1, c2 = st.columns([3, 2])
-        c1.plotly_chart(build_network(net, a, current_level, ("bfs",) + tuple(routes_shown)), width="stretch", key="net_chart")
+        c1.plotly_chart(build_network(net, a, current_level, ("bfs",) + tuple(routes_shown)), width="stretch", key=f"net_chart_{current_level}")
         c2.markdown("**Entdeckte Knoten je Schicht** (die Front der Welle)")
-        c2.plotly_chart(build_layers(sizes, current_level), width="stretch", key="layer_chart")
+        c2.plotly_chart(build_layers(sizes, current_level), width="stretch", key=f"layer_chart_{current_level}")
         seen = int(((res.dist >= 0) & (res.dist <= current_level)).sum())
         c2.caption(f"Bis Schicht {current_level}: {seen} von {g.n} Knoten entdeckt. Die Front - die Knoten, die entdeckt, aber noch nicht abgearbeitet sind - war höchstens {m['max_front']} groß.")
 
