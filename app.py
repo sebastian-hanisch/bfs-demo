@@ -277,7 +277,7 @@ with st.expander("🔧 Wie wir das erreichen – Breitensuche im Vergleich"):
             ("kostenoptimal (Referenz)", "optimal", m["hops_optimal"], m["cost_optimal"], m["settled"]), ("Tiefensuche", "dfs", m["hops_dfs"], m["cost_dfs"], m["dfs_visited"])]
     if m["reachable"]:
         st.table({"Verfahren": [r[0] for r in rows], "Kanten": [r[2] if a.routes[r[1]] else "–" for r in rows],
-                  f"Länge [{net.unit}]": [f"{r[3]:,.0f}".replace(",", ".") if a.routes[r[1]] else "–" for r in rows], "Knoten besucht": [r[4] for r in rows]})
+                  f"Länge [{net.unit}]": [f"{r[3]:,.0f}".replace(",", ".") if a.routes[r[1]] else "–" for r in rows], "Knoten besucht": [str(r[4]) for r in rows]})
     st.caption("Die Tiefensuche geht so tief wie möglich, bevor sie zurückkehrt: sie findet irgendeine Route, meist eine sehr lange - die Gegenprobe, dass die Schichten-Reihenfolge von BFS kein Zufall ist, sondern die Garantie liefert. "
                "Bei der kostenoptimalen Referenz zählt die Spalte die Knoten, deren Kosten am Ende feststanden.")
 
