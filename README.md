@@ -1,5 +1,7 @@
 # Breitensuche – die Route mit den wenigsten Kanten – Streamlit-Demo
 
+**[→ Demo live ausprobieren](https://sebastianhanisch-bfs-demo.streamlit.app/)**
+
 Erstes Stück (**Wurzel**) der **Kürzeste-Wege-Linie** der "Konzepte"-Reihe für die Website "Sebastian Hanisch – Operations Research und Machine Learning":
 anders als die Fall-Demos im Portfolio (ein Anwendungsfall, mehrere Verfahren im Vergleich) zeigt diese Demo **ein** Verfahren – die **Breitensuche (BFS)** – an einem wachsenden Beispiel.
 Vom Start aus werden erst alle Nachbarn besucht, dann deren Nachbarn – **Schicht für Schicht**; das Ziel ist gefunden, sobald es zum ersten Mal entdeckt wird, und seine Route hat garantiert die **wenigsten Kanten**.
