@@ -21,6 +21,7 @@ from bf_presets import (
     init_session_state_defaults,
     load_permalink_settings,
     randomize_seed,
+    seed_widget,
     sync_query_params,
 )
 from bf_scenario import make_network
@@ -113,6 +114,7 @@ with st.sidebar:
         help="Erzeugt (Stadtnetz, Labyrinth) oder fest: Toronto Campus sind echte OpenStreetMap-Daten (5 072 Kreuzungen und Wegpunkte, 14 503 gerichtete Kanten), Bus-Umstiege und Kontaktnetz sind kleine selbst gezeichnete Graphen.",
     )
     if net_key in C.GRID_NETS:
+        seed_widget("side_slider")
         side = st.slider(
             "Kreuzungen je Seite" if net_key == "city" else "Zellen je Seite", *bounds("side_slider"), key="side_slider",
             help="Größe des Netzes (Seite × Seite). Beim Stadtnetz (Reichweite 2.3, Streuung 1.0) ist der Median-Umweg der BFS-Route bei 6 / 10 / 20 / 30 / 40 Kreuzungen je Seite 20 % / 24 % / 23 % / 28 % / 26 % - "
@@ -122,18 +124,21 @@ with st.sidebar:
     else:
         side = int(st.session_state.get(KEPT["side_slider"], C.DEFAULT_SIDE))
     if net_key == "city":
+        seed_widget("reach_slider")
         reach = st.slider(
             "Reichweite der Straßen [Blocklängen]", *bounds("reach_slider"), key="reach_slider", step=0.1,
             help="Wie weit eine Straße zwischen zwei Kreuzungen reichen darf (1 = nur Nachbarn im Raster, größer = auch längere Verbindungen). Median-Umweg der BFS-Route bei 1.0 / 1.5 / 2.3 / 3.2: 8 % / 20 % / 23 % / 35 % - "
                  "BFS liebt die langen Verbindungen, weil sie die Kantenzahl senken.",
         )
         st.session_state[KEPT["reach_slider"]] = reach
+        seed_widget("spread_slider")
         spread = st.slider(
             "Streuung der Kosten", *bounds("spread_slider"), key="spread_slider", step=0.25,
             help="Kosten einer Straße = Länge × (1 + Streuung × Zufall): Ampeln, Steigung, Belag. Median-Umweg bei 0 / 0.5 / 1 / 2 / 3: 7 % / 14 % / 23 % / 39 % / 53 %. "
                  "Bei 0 sind alle Kosten gleich der Länge - auch dann bleibt ein Umweg, weil sich die Länge der Straßen unterscheidet, nicht nur ihre Zahl.",
         )
         st.session_state[KEPT["spread_slider"]] = spread
+        seed_widget("blocked_slider")
         blocked = st.slider(
             "Gesperrte Straßen [%]", *bounds("blocked_slider"), key="blocked_slider",
             help="Anteil der Straßen, die gesperrt sind (das Netz bleibt zusammenhängend). Median-Umweg bei 0 / 20 / 40 / 60 %: 28 % / 23 % / 22 % / 15 % - vermutlich, weil mit weniger Alternativen beide Routen weniger Spielraum haben.",
@@ -144,6 +149,7 @@ with st.sidebar:
         spread = float(st.session_state.get(KEPT["spread_slider"], C.DEFAULT_SPREAD))
         blocked = int(st.session_state.get(KEPT["blocked_slider"], C.DEFAULT_BLOCKED))
     if net_key == "maze":
+        seed_widget("walls_slider")
         walls = st.slider(
             "Wände [%]", *bounds("walls_slider"), key="walls_slider",
             help="Anteil der Zellen, die Wand sind (bei zu vielen Wänden werden einzelne wieder geöffnet, damit Start und Ziel verbunden bleiben). Der Umweg der BFS-Route ist bei 10 / 35 / 45 % immer 0 - jeder Schritt kostet dasselbe.",
@@ -152,6 +158,7 @@ with st.sidebar:
     else:
         walls = int(st.session_state.get(KEPT["walls_slider"], C.DEFAULT_WALLS))
     if net_key in C.GRID_NETS:
+        seed_widget("seed_input")
         seed = st.number_input("Zufalls-Seed", *bounds("seed_input"), key="seed_input", step=1)
         st.session_state[KEPT["seed_input"]] = seed
         st.button("🎲 Neues Netz generieren", width="stretch", on_click=randomize_seed, help="Würfelt einen neuen Zufalls-Seed für das Netz.")
