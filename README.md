@@ -8,13 +8,13 @@ Vom Start aus werden erst alle Nachbarn besucht, dann deren Nachbarn – **Schic
 Der Haken steckt im Wort: BFS **zählt Kanten, nicht Kosten**.
 
 **Einordnung in die Reihe (die Kanten des Graphen):** die Wurzel ist bewusst die einfachste Suche im Netz. Ihre Schwäche – Kosten werden ignoriert – ist der Ansatzpunkt des nächsten Stücks (**Dijkstra**: Kosten korrekt, aber blind in alle Richtungen);
-die Suche in alle Richtungen und die Anfrage von vorn sind die Ansatzpunkte von Bidirektionaler Suche und Contraction Hierarchies. Bisher gebaut: nur die Wurzel.
+die Suche in alle Richtungen und die Anfrage von vorn sind die Ansatzpunkte von Bidirektionaler Suche und Contraction Hierarchies. Inzwischen sind auch die Nachfolger gebaut (siehe Baum).
 ```
 bfs-demo (Wurzel: Kanten zählen, nicht Kosten)
-  └─ Dijkstra (Kosten korrekt, blind in alle Richtungen)                       [nicht gebaut]
-       ├─ Bidirektionale Suche → Contraction Hierarchies                       [nicht gebaut]
-       ├─ Bellman-Ford + Floyd-Warshall → Johnson (Konvergenz: Umgewichtung)   [nicht gebaut]
-       └─ Mehrkriterien-Routing (Zeit gegen CO₂, Pareto)                       [nicht gebaut]
+  └─ Dijkstra (Kosten korrekt, blind in alle Richtungen)                       [gebaut: dijkstra-demo]
+       ├─ Bidirektionale Suche → Contraction Hierarchies                       [gebaut: bidirectional-demo, contraction-hierarchies-demo]
+       ├─ Bellman-Ford + Floyd-Warshall → Johnson (Konvergenz: Umgewichtung)   [gebaut: bellman-ford-demo, floyd-warshall-demo, johnson-demo]
+       └─ Mehrkriterien-Routing (Zeit gegen CO₂, Pareto)                       [gebaut: multicriteria-demo]
 A* steht einmal in der Baumsuche-Linie und wird von hier aus nur verlinkt.
 ```
 
@@ -80,3 +80,7 @@ streamlit run app.py
 ```
 
 Tests: `pip install -r requirements-dev.txt` und `python -m pytest tests/`. Jede Zahl in Hilfetexten, Presets und Tabellen ist in `tests/test_claims.py` belegt; die Kreuzprobe von BFS und Referenz läuft gegen networkx.
+
+---
+
+Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zur Reihe: [Kürzeste Wege: von der Breitensuche bis RAPTOR](https://sebastianhanisch.net/konzepte-kuerzeste-wege.html).

@@ -350,7 +350,7 @@ st.markdown(
 | **Kantenzahl ist ein Maß für Entfernung** | Bei echten Kartendaten hängt sie davon ab, wie dicht digitalisiert wurde: im Toronto-Beispiel hat die kürzere Route 57 statt 29 Kanten. | (Kosten in das Modell) |
 """
 )
-st.caption("Die Nachbarn der Kürzeste-Wege-Linie (noch nicht gebaut): Dijkstra, Bidirektionale Suche, Contraction Hierarchies, Bellman-Ford, Floyd-Warshall, Johnson und Mehrkriterien-Routing. A\\* steht in der Baumsuche-Linie.")
+st.caption("Die Nachbarn der Kürzeste-Wege-Linie: Dijkstra, Bidirektionale Suche, Contraction Hierarchies, Bellman-Ford, Floyd-Warshall, Johnson und Mehrkriterien-Routing. A\\* steht in der Baumsuche-Linie.")
 
 st.markdown("---")
 
@@ -379,6 +379,6 @@ st.markdown("---")
 
 st.caption(
     "Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – "
-    "Operations Research und Machine Learning. Interesse an einer maßgeschneiderten Lösung für "
-    "Ihr Unternehmen? [Kontakt aufnehmen](https://sebastianhanisch.net/kontakt.html)"
+    "Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). "
+    "Mehr zur Reihe: [Kürzeste Wege: von der Breitensuche bis RAPTOR](https://sebastianhanisch.net/konzepte-kuerzeste-wege.html)."
 )
