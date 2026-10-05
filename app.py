@@ -141,7 +141,7 @@ with st.sidebar:
         seed_widget("blocked_slider")
         blocked = st.slider(
             "Gesperrte Straßen [%]", *bounds("blocked_slider"), key="blocked_slider",
-            help="Anteil der Straßen, die gesperrt sind (das Netz bleibt zusammenhängend). Median-Umweg bei 0 / 20 / 40 / 60 %: 28 % / 23 % / 22 % / 15 % - vermutlich, weil mit weniger Alternativen beide Routen weniger Spielraum haben.",
+            help="Anteil der Straßen, die gesperrt sind (das Netz bleibt zusammenhängend: bei Reichweite 1.0 lassen sich höchstens etwa 50 % sperren, der Rest hält das Raster zusammen). Median-Umweg bei 0 / 20 / 40 / 60 %: 28 % / 23 % / 22 % / 15 % - vermutlich, weil mit weniger Alternativen beide Routen weniger Spielraum haben.",
         )
         st.session_state[KEPT["blocked_slider"]] = blocked
     else:
